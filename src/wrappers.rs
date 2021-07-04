@@ -405,6 +405,8 @@ pub fn get_player_id() -> usize {
 }
 
 pub fn log(s: &str) {
-  let c_string = CString::new(s).unwrap();
-  unsafe { console::log(c_string.as_ptr()) }
+  for line in s.split("\n") {
+    let c_string = CString::new(line).unwrap();
+    unsafe { console::log(c_string.as_ptr()) }
+  }
 }

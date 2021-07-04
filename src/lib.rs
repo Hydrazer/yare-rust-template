@@ -33,5 +33,12 @@ pub extern "C" fn tick(_tick: u32) {
     }
 
     // this is a mess, but it works lol (yes ima change it)
-    log(&*(String::from("There is ") + &*my_spirits.len().to_string() + " friendly spirits found."))
+    log(&*format!(
+        "=== STATS ===\n
+        FRIENDLY SPIRITS: {}\n
+        OTHER SPIRITS: {}\n
+        ",
+        my_alive_spirits.len(),
+        alive_spirits.len() - my_alive_spirits.len()
+    ));
 }
