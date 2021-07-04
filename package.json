@@ -11,6 +11,7 @@
     "build:converter": "node scripts/converter",
     "build:bundle": "rollup -c",
     "build:cleanup": "rimraf ./target",
+    "rustformat": "cargo fmt && cargo clippy",
     "postinstall": "rustup toolchain add nightly && rustup target add wasm32-unknown-unknown && rustup component add llvm-tools-preview && rustup update & cargo update & git submodule update --init --recursive && yarn updatewasmconverter",
     "updatewasmconverter": "git submodule update --remote --merge && git submodule init"
   },
