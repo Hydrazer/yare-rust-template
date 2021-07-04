@@ -1,10 +1,10 @@
+#![allow(dead_code)]
 use std::ffi::CString;
 use std::{
   cmp::Ordering,
   iter::Sum,
   ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign},
 };
-use yare;
 use yare::*;
 
 #[derive(Copy, Clone)]
@@ -230,37 +230,34 @@ pub fn get_spirits() -> Vec<Spirit> {
 pub fn get_my_spirits() -> Vec<Spirit> {
   let spirits = get_spirits();
   let mut my_spirits: Vec<Spirit> = Vec::new();
-  for index in 0..spirits.len() {
-    let spirit: &Spirit = &spirits[index];
-    if (spirit.friendly) {
-      my_spirits.push(spirits[index])
+  for spirit in &spirits {
+    if spirit.friendly {
+      my_spirits.push(*spirit)
     }
   }
-  return my_spirits;
+  my_spirits
 }
 
 pub fn get_alive_spirits() -> Vec<Spirit> {
   let spirits = get_spirits();
   let mut alive_spirits: Vec<Spirit> = Vec::new();
-  for index in 0..spirits.len() {
-    let spirit: &Spirit = &spirits[index];
-    if (spirit.alive) {
-      alive_spirits.push(spirits[index])
+  for spirit in &spirits {
+    if spirit.alive {
+      alive_spirits.push(*spirit)
     }
   }
-  return alive_spirits;
+  alive_spirits
 }
 
 pub fn get_my_alive_spirits() -> Vec<Spirit> {
   let spirits = get_my_spirits();
   let mut my_alive_spirits: Vec<Spirit> = Vec::new();
-  for index in 0..spirits.len() {
-    let spirit: &Spirit = &spirits[index];
-    if (spirit.alive) {
-      my_alive_spirits.push(spirits[index])
+  for spirit in &spirits {
+    if spirit.alive {
+      my_alive_spirits.push(*spirit)
     }
   }
-  return my_alive_spirits;
+  my_alive_spirits
 }
 
 // pub const spirits: std::vec::Vec<Spirit> = get_spirits();
@@ -401,11 +398,11 @@ pub mod graphics {
 }
 
 pub fn get_player_id() -> usize {
-  return unsafe { player::me() };
+  unsafe { player::me() }
 }
 
 pub fn log(s: &str) {
-  for line in s.split("\n") {
+  for line in s.split('\n') {
     let c_string = CString::new(line).unwrap();
     unsafe { console::log(c_string.as_ptr()) }
   }
