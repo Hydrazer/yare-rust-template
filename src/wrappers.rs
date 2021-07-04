@@ -252,7 +252,7 @@ pub fn get_alive_spirits() -> Vec<Spirit> {
 }
 
 pub fn get_my_alive_spirits() -> Vec<Spirit> {
-  let spirits = get_spirits();
+  let spirits = get_my_spirits();
   let mut my_alive_spirits: Vec<Spirit> = Vec::new();
   for index in 0..spirits.len() {
     let spirit: &Spirit = &spirits[index];
