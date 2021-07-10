@@ -161,11 +161,11 @@ pub enum Shape {
 pub struct Spirit {
   pub index: usize,
   pub alive: bool,
-  pub energy_cap: u32,
-  pub energy: u32,
+  pub energy_cap: i32,
+  pub energy: i32,
   pub friendly: bool,
   pub pos: Vec2,
-  pub size: u32,
+  pub size: i32,
   pub shape: Shape,
 }
 
@@ -174,8 +174,7 @@ impl Spirit {
     unsafe { spirit::goto(self.index, pos.x, pos.y) }
   }
 
-  /// Using a generic allows passing both an index or a reference to a spirit.
-  pub fn energize<I: Into<usize>>(&self, target: &Spirit) {
+  pub fn energize(&self, target: &Spirit) {
     unsafe { spirit::energize(self.index, target.index) }
   }
 
@@ -202,9 +201,7 @@ pub fn get_spirits() -> Vec<Spirit> {
       let energy_cap = spirit::energy_capacity(index);
       let energy = spirit::energy(index);
       let friendly = player::me() == spirit::player_id(index);
-      // let Position { x, y } = spirit::position(index);
-      let x = spirit::position_x(index);
-      let y = spirit::position_y(index);
+      let pos = spirit::position(index);
       let size = spirit::size(index);
       let shape = if spirit::shape(index) == 0 {
         Shape::Circle
@@ -218,7 +215,7 @@ pub fn get_spirits() -> Vec<Spirit> {
         energy_cap,
         energy,
         friendly,
-        pos: Vec2 { x, y },
+        pos: Vec2 { x: pos.x, y: pos.y },
         size,
         shape,
       });
@@ -265,9 +262,9 @@ pub fn get_my_alive_spirits() -> Vec<Spirit> {
 pub struct Base {
   pub index: usize,
   pub pos: Vec2,
-  pub energy_cap: u32,
-  pub energy: u32,
-  pub current_spirit_cost: u32,
+  pub energy_cap: i32,
+  pub energy: i32,
+  pub current_spirit_cost: i32,
   pub alive: bool,
   pub player_id: usize,
 }
@@ -277,8 +274,7 @@ pub fn get_bases() -> Vec<Base> {
     let count = base::count();
     let mut new_bases = Vec::with_capacity(count);
     for index in 0..count {
-      let x = base::position_x(index);
-      let y = base::position_y(index);
+      let pos = base::position(index);
       let energy_cap = base::energy_capacity(index);
       let energy = base::energy(index);
       let current_spirit_cost = base::current_spirit_cost(index);
@@ -287,7 +283,7 @@ pub fn get_bases() -> Vec<Base> {
 
       new_bases.push(Base {
         index,
-        pos: Vec2 { x, y },
+        pos: Vec2 { x: pos.x, y: pos.y },
         energy_cap,
         energy,
         current_spirit_cost,
@@ -304,8 +300,8 @@ pub fn get_bases() -> Vec<Base> {
 pub struct Star {
   pub index: usize,
   pub pos: Vec2,
-  pub size: u32,
-  pub energy: u32,
+  pub size: i32,
+  pub energy: i32,
   pub range: u32,
 }
 
@@ -314,15 +310,14 @@ pub fn get_stars() -> Vec<Star> {
     let count = star::count();
     let mut new_stars = Vec::with_capacity(count);
     for index in 0..count {
-      let x = star::position_x(index);
-      let y = star::position_y(index);
+      let pos = star::position(index);
       let size = 220; // 80 for smaller stars, Will needs to fix
       let energy = 0; // Will needs to fix
       let range = 200;
 
       new_stars.push(Star {
         index,
-        pos: Vec2 { x, y },
+        pos: Vec2 { x: pos.x, y: pos.y },
         size,
         energy,
         range,
@@ -337,8 +332,8 @@ pub fn get_stars() -> Vec<Star> {
 pub struct Outpost {
   pub index: usize,
   pub pos: Vec2,
-  pub energy_cap: u32,
-  pub energy: u32,
+  pub energy_cap: i32,
+  pub energy: i32,
   pub range: f32,
   pub player_id: usize,
 }
@@ -348,8 +343,7 @@ pub fn get_outposts() -> Vec<Outpost> {
     let count = outpost::count();
     let mut new_outposts = Vec::with_capacity(count);
     for index in 0..count {
-      let x = outpost::position_x(index);
-      let y = outpost::position_y(index);
+      let pos = outpost::position(index);
       let energy = outpost::energy(index);
       let energy_cap = outpost::energy_capacity(index);
       let range = outpost::range(index);
@@ -357,7 +351,7 @@ pub fn get_outposts() -> Vec<Outpost> {
 
       new_outposts.push(Outpost {
         index,
-        pos: Vec2 { x, y },
+        pos: Vec2 { x: pos.x, y: pos.y },
         energy,
         energy_cap,
         range,

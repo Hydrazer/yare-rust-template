@@ -8,10 +8,14 @@ let cargoProjectName = toml
   .package.name.replace(/\-/g, "_");
 
 export default {
-  input: `target/wasm32-unknown-unknown/release/${cargoProjectName}-opt.js`,
+  input: `target/wasm32-unknown-unknown/release/${cargoProjectName}.js`,
   output: {
     file: "bundle.js",
     format: "esm",
   },
-  plugins: [babel({ babelHelpers: "bundled" }), terser()],
+  plugins: [
+    babel({ babelHelpers: "bundled" }),
+    terser(),
+    /**/
+  ],
 };
