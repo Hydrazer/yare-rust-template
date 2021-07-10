@@ -182,6 +182,10 @@ impl Spirit {
     unsafe { spirit::energize_base(self.index, target.index) }
   }
 
+  pub fn energize_outpost(&self, target: &Outpost) {
+    unsafe { spirit::energize_outpost(self.index, target.index) }
+  }
+
   pub fn drain_star(&self) {
     unsafe { spirit::energize(self.index, self.index) }
   }
@@ -258,7 +262,7 @@ pub fn get_my_alive_spirits() -> Vec<Spirit> {
 }
 
 // pub const spirits: std::vec::Vec<Spirit> = get_spirits();
-
+#[derive(Copy, Clone)]
 pub struct Base {
   pub index: usize,
   pub pos: Vec2,
@@ -296,7 +300,7 @@ pub fn get_bases() -> Vec<Base> {
 }
 
 // pub const bases: std::vec::Vec<Base> = get_bases();
-
+#[derive(Copy, Clone)]
 pub struct Star {
   pub index: usize,
   pub pos: Vec2,
@@ -311,8 +315,8 @@ pub fn get_stars() -> Vec<Star> {
     let mut new_stars = Vec::with_capacity(count);
     for index in 0..count {
       let pos = star::position(index);
-      let size = 220; // 80 for smaller stars, Will needs to fix
-      let energy = 0; // Will needs to fix
+      let size = star::energy_capacity(index);
+      let energy = star::energy(index);
       let range = 200;
 
       new_stars.push(Star {
