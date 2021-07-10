@@ -4,7 +4,7 @@
   "description": "Create yare bots with rust!",
   "main": "bundle.js",
   "scripts": {
-    "build": "yarn build:cargo_nomultivalue && yarn build:opt && yarn build:converter && yarn build:bundle && yarn build:cleanup",
+    "build": "yarn build:cargo_nomultivalue && yarn build:opt && yarn build:converter && yarn build:bundle",
     "build:cargo_nomultivalue": "cargo rustc --target wasm32-unknown-unknown --release",
     "build:cargo": "cargo rustc --target wasm32-unknown-unknown --release -- -C target-feature=+multivalue",
     "build:opt": "node scripts/opt",
