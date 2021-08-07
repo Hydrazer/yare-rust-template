@@ -5,7 +5,7 @@ use std::{
   iter::Sum,
   ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign},
 };
-use yare::*;
+use yareio::*;
 
 #[derive(Copy, Clone)]
 pub struct Vec2 {
@@ -374,23 +374,23 @@ pub mod graphics {
     pub red: u8,
     pub green: u8,
     pub blue: u8,
-    pub alpha: u8,
+    pub alpha: f32,
   }
   fn setcolour(colour: Colour) {
     unsafe {
-      yare::graphics::colour(colour.red, colour.green, colour.blue, colour.alpha);
+      yareio::graphics::colour(colour.red, colour.green, colour.blue, colour.alpha);
     }
   }
   pub fn circle(pos: Vec2, radius: f32, colour: Colour) {
     setcolour(colour);
     unsafe {
-      yare::graphics::circle(pos.x, pos.y, radius);
+      yareio::graphics::circle(pos.x, pos.y, radius);
     }
   }
   pub fn line(pos1: Vec2, pos2: Vec2, colour: Colour) {
     setcolour(colour);
     unsafe {
-      yare::graphics::line(pos1.x, pos1.y, pos2.x, pos2.y);
+      yareio::graphics::line(pos1.x, pos1.y, pos2.x, pos2.y);
     }
   }
 }

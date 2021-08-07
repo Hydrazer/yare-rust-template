@@ -24,7 +24,7 @@ pub extern "C" fn tick(_tick: u32) {
         red: 255,
         green: 0,
         blue: 255,
-        alpha: 1,
+        alpha: 1.0,
       },
     )
   }

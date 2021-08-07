@@ -10,7 +10,7 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dependencies]
-yare = { git = "https://github.com/ViliamVadocz/yare-rust" }
+yareio = "0.1.0"
 
 [profile.release]
 opt-level = 3
