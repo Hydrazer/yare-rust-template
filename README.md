@@ -4,7 +4,7 @@ A easy to setup template for ViliamVadocz/yare-rust
 
 ## Known issues
 
-- Wasm2js script opens chrome window when building (waiting for this pr [L0laapk3/yare.io-wasm/pull/2](https://github.com/L0laapk3/yare.io-wasm/pull/2))
+None!
 
 ## Setup
 
