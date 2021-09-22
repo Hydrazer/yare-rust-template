@@ -3,7 +3,7 @@ mod wrappers;
 use crate::wrappers::*;
 
 #[no_mangle]
-#[allow(dead_code)] // You probably want to remove this
+// #[allow(dead_code)] // You probably want to remove this
 pub extern "C" fn tick(_tick: u32) {
   //   let spirits: Vec<Spirit> = get_spirits();
   //   let my_spirits: Vec<Spirit> = get_my_spirits();
