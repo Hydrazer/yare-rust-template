@@ -204,7 +204,7 @@ pub fn get_spirits() -> Vec<Spirit> {
       let alive = spirit::hp(index) > 0;
       let energy_cap = spirit::energy_capacity(index);
       let energy = spirit::energy(index);
-      let friendly = player::me() == spirit::player_id(index);
+      let friendly = player::me() == spirit::id(index).player_id;
       let pos = spirit::position(index);
       let size = spirit::size(index);
       let shape = if spirit::shape(index) == 0 {

@@ -4,15 +4,12 @@
   "description": "Create yare bots with rust!",
   "main": "bundle.js",
   "scripts": {
-    "build": "yarn build:cargo && yarn build:converter && yarn build:bundle",
-    "build:cargo_nomultivalue": "cargo rustc --target wasm32-unknown-unknown --release",
-    "build:cargo": "cargo rustc --target wasm32-unknown-unknown --release -- -C target-feature=+multivalue",
-    "build:converter": "node scripts/converter",
-    "build:bundle": "rollup -c",
-    "build:cleanup": "rimraf ./target",
-    "rustformat": "cargo fmt && cargo clippy",
-    "postinstall": "rustup toolchain add nightly && rustup target add wasm32-unknown-unknown && rustup component add llvm-tools-preview && rustup update & cargo update & git submodule update --init --recursive && yarn updatewasmconverter",
-    "updatewasmconverter": "git submodule update --remote --merge && git submodule init"
+    "build": "yarn build:cargo && yarn build:converter",
+    "build:cargo": "cargo build --target wasm32-unknown-unknown --release",
+    "build:converter": "node scripts/converter > ./build/bundle.js",
+    "upload": "yarn build && node scripts/uploader",
+    "fmt": "cargo fmt && cargo clippy",
+    "postinstall": "rustup toolchain add nightly && rustup target add wasm32-unknown-unknown && rustup component add llvm-tools-preview && rustup update && cargo update"
   },
   "repository": {
     "type": "git",
@@ -25,12 +22,8 @@
   },
   "homepage": "https://github.com/swz-gh/yare-rust-template#readme",
   "devDependencies": {
-    "@babel/core": "^7.14.5",
-    "@rollup/plugin-babel": "^5.3.0",
-    "minify": "^7.0.2",
-    "rimraf": "^3.0.2",
-    "rollup": "^2.53.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "toml": "^3.0.0"
+    "colors": "^1.4.0",
+    "yare-sync": "^2.0.0",
+    "yareio-wasm-gluer": "^0.1.3"
   }
 }

@@ -156,3 +156,5 @@ Cargo.lock
 ### Local ###
 
 bundle.js
+
+build/*

@@ -1,15 +1,10 @@
-const toml = require("toml");
-const fs = require("fs");
+const { readdirSync } = require("fs");
 const { execSync } = require("child_process");
 
-let cargoProjectName = toml
-  .parse(fs.readFileSync("./Cargo.toml", "utf-8"))
-  .package.name.replace(/\-/g, "_");
+let wasmfile = readdirSync("./target/wasm32-unknown-unknown/release/").find(
+  (a) => a.endsWith(".wasm")
+);
 
-let script = `node wasm2js/wasm2yareio.js target/wasm32-unknown-unknown/release/${cargoProjectName}.wasm --no-auto-update`;
+let command = `yareio-wasm-gluer ./target/wasm32-unknown-unknown/release/${wasmfile}`;
 
-console.log(script);
-
-let out = execSync(script);
-
-console.log(out.toString());
+console.log(execSync(command).toString());

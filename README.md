@@ -25,4 +25,5 @@ You can now edit your code in `src/lib.rs` and check out the wrappers in `src/wr
 
 ## Building
 
-Building is as simple as `yarn build`. Once its done you will have a file called `bundle.js`. Then you just need to copy the code from `bundle.js` to the yare editor and press `UPDATE CODE` on the yare website.
+Building is as simple as `yarn build`. Once its done you will have a file called `bundle.js`.
+If you wanna upload it to yare, run `yarn upload` and it'll compile and upload it to your active games.
